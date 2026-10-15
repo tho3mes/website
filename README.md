@@ -7,6 +7,9 @@ Statische Projektseite von Thomas Oesterle, ausgeliefert über GitHub Pages. Kei
 - [ ] Schriften nach `assets/fonts/` kopieren (siehe LIESMICH.txt) und `OFL.txt` dazulegen
 - [ ] Domain in `CNAME` prüfen (aktuell: `oesterle.cloud`)
 
+## Unterstützen-Link
+Ko-fi-Konto anlegen und in allen HTML-Dateien `ko-fi.com/DEIN-NAME` durch den eigenen Namen ersetzen.
+
 ## Neues Projekt ergänzen
 1. Ordner `projektname/` mit `index.html` anlegen (Vorlage: `wortlaut/index.html`).
 2. Auf der Startseite (`index.html`) im Abschnitt „Projekte“ eine Karte ergänzen.
