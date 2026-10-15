@@ -1,0 +1,5 @@
+Hier die Schriftdateien aus dem Wortlaut-Projekt ablegen (app2/schriften):
+  InstrumentSerif-Regular.ttf
+  InstrumentSerif-Italic.ttf
+  Inter.ttf   (umbenannt aus Inter-VariableFont_opsz,wght.ttf)
+Lizenz: SIL Open Font License 1.1 (OFL.txt mit ablegen). Ohne Dateien nutzt die Seite Georgia bzw. die Systemschrift.

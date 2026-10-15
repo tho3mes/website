@@ -1,0 +1,79 @@
+/* Design „Tinte“ wie die Wortlaut-App: Papier, Tinte, ein Signalakzent */
+@font-face{font-family:"Instrument Serif";src:url("/assets/fonts/InstrumentSerif-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("/assets/fonts/InstrumentSerif-Italic.ttf") format("truetype");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Inter";src:url("/assets/fonts/Inter.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap}
+:root{--papier:#F7F5F0;--tinte:#16161A;--signal:#FF5A36;--signal2:#E84826;--stein:#8A857C;--linie:#E6E1D8;--sanft:#EFECE5;--flaeche:#FFFFFF;
+--serif:"Instrument Serif",Georgia,"Times New Roman",serif;--sans:"Inter","Segoe UI",system-ui,-apple-system,sans-serif}
+@media (prefers-color-scheme:dark){:root{--papier:#16161A;--tinte:#F2EFE8;--stein:#A8A39A;--linie:#2E2E35;--sanft:#1E1E23;--flaeche:#222228}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--tinte);font:17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--signal);text-underline-offset:3px}
+a:hover{color:var(--signal2)}
+.rahmen{max-width:1080px;margin:0 auto;padding:0 24px}
+.schmal{max-width:760px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;background:var(--tinte);color:var(--papier);padding:8px 12px;border-radius:8px}
+.kopf{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--papier) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--linie)}
+.kopf-innen{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.marke{font:28px/1 var(--serif);text-decoration:none}
+.marke em{color:var(--signal)}
+nav{display:flex;gap:22px;font-size:15px}
+nav a{text-decoration:none;color:var(--stein)}nav a:hover{color:var(--tinte)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0 0 .5em}
+h1{font-size:clamp(44px,7vw,84px);letter-spacing:-.01em}
+h2{font-size:clamp(30px,4vw,44px)}
+h3{font-size:26px}
+em{font-style:italic}
+h1 em,h2 em{color:var(--signal)}
+.held{padding:clamp(56px,10vw,120px) 0 56px}
+.vorzeile{text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--stein);margin:0 0 18px}
+.einleitung{font-size:clamp(18px,2.1vw,22px);max-width:640px;color:var(--tinte)}
+.leise{color:var(--stein);font-size:14px}
+.aktionen{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 12px}
+.knopf{display:inline-block;background:var(--signal);color:#fff;padding:13px 22px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .15s,background .15s}
+.knopf:hover{background:var(--signal2);color:#fff;transform:translateY(-1px)}
+.knopf.zweit{background:transparent;color:var(--tinte);border:1px solid var(--linie)}
+.knopf.zweit:hover{border-color:var(--tinte);color:var(--tinte)}
+.abschnitt{padding:72px 0}
+.abschnitt h2::after{content:"";display:block;width:28px;height:3px;background:var(--signal);border-radius:2px;margin-top:14px}
+.sanft{background:var(--sanft)}
+.raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:28px}
+.raster.drei{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.karte{background:var(--flaeche);border:1px solid var(--linie);border-radius:18px;padding:26px;text-decoration:none;display:block;transition:transform .15s,border-color .15s}
+a.karte:hover{transform:translateY(-2px);border-color:var(--signal);color:inherit}
+.karte p{color:var(--stein);margin:0}
+.karte.leer{border-style:dashed;background:transparent}
+.etikett{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.mehr{display:inline-block;margin-top:16px;font-weight:600;font-size:15px}
+.nr{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;border:1px solid var(--linie);color:var(--signal);font-weight:600;margin-bottom:12px}
+.zwei{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px}
+.mitte{align-items:center}
+.punkte{list-style:none;padding:0;margin:0}
+.punkte li{padding:12px 0 12px 26px;border-bottom:1px solid var(--linie);position:relative}
+.punkte li::before{content:"";position:absolute;left:0;top:22px;width:10px;height:10px;border-radius:50%;background:var(--signal)}
+.schritte{padding-left:22px}.schritte li{margin:10px 0}
+kbd,code{font:14px ui-monospace,Consolas,monospace;background:var(--flaeche);border:1px solid var(--linie);border-radius:6px;padding:1px 6px}
+details{border-bottom:1px solid var(--linie);padding:14px 0}
+summary{cursor:pointer;font-weight:600;list-style:none}summary::-webkit-details-marker{display:none}
+summary::before{content:"+";color:var(--signal);display:inline-block;width:22px;font-weight:700}
+details[open] summary::before{content:"–"}
+details p{color:var(--stein);margin:8px 0 0 22px}
+.vorschau{background:var(--flaeche);border:1px solid var(--linie);border-radius:22px;padding:26px;box-shadow:0 30px 60px -30px rgba(22,22,26,.25)}
+.status{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--stein)}
+.status .zeit{margin-left:auto;font-variant-numeric:tabular-nums}
+.punkt{width:10px;height:10px;border-radius:50%;background:var(--signal);animation:puls 1.4s infinite}
+@keyframes puls{50%{opacity:.35}}
+.pegel{display:flex;gap:5px;align-items:center;height:56px;margin:16px 0}
+.pegel i{flex:1;background:var(--tinte);border-radius:3px;height:30%;animation:welle 1.1s ease-in-out infinite}
+.pegel i:nth-child(odd){animation-delay:.15s}.pegel i:nth-child(3n){animation-delay:.3s}.pegel i:nth-child(4n){animation-delay:.45s}
+@keyframes welle{50%{height:95%}}
+.modi{display:flex;gap:8px}
+.modi b,.modi span{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;border:1px solid var(--linie);font-size:14px}
+.modi b{border-color:var(--signal);color:var(--signal)}
+.ergebnis{font:22px/1.35 var(--serif);font-style:italic;margin:18px 0 0}
+.recht h2{font-size:24px;margin-top:1.4em}.recht h2::after{display:none}
+.fuss{border-top:1px solid var(--linie);padding:28px 0;font-size:14px;color:var(--stein)}
+.fuss-innen{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.fuss p{margin:0}
+@media (max-width:640px){nav a:not(:last-child){display:none}.abschnitt{padding:56px 0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

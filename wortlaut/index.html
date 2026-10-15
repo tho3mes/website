@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wortlaut – kostenlose Diktier-App mit KI für Windows</title>
+<meta name="description" content="Wortlaut macht aus Sprache sauberen Text und fügt ihn in jedes Programm ein. Kostenlos für Windows, mit OpenAI, Gemini, Mistral, Claude oder oneAI.">
+<link rel="canonical" href="https://oesterle.cloud/wortlaut/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#F7F5F0">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Thomas Oesterle">
+<meta property="og:title" content="Wortlaut – kostenlose Diktier-App mit KI für Windows">
+<meta property="og:description" content="Wortlaut macht aus Sprache sauberen Text und fügt ihn in jedes Programm ein. Kostenlos für Windows, mit OpenAI, Gemini, Mistral, Claude oder oneAI.">
+<meta property="og:url" content="https://oesterle.cloud/wortlaut/">
+<meta property="og:image" content="https://oesterle.cloud/assets/og-wortlaut.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Wortlaut", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows 10, Windows 11", "description": "Diktier-App für Windows: Sprache wird per KI zu sauberem Text und direkt in das aktive Programm eingefügt.", "url": "https://oesterle.cloud/wortlaut/", "downloadUrl": "https://github.com/tho3mes/wortlaut-releases/releases/latest", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Thomas Oesterle", "url": "https://oesterle.cloud"}, "inLanguage": "de"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Ist Wortlaut wirklich kostenlos?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Wortlaut selbst kostet nichts. Für die Spracherkennung brauchst du einen eigenen API-Schlüssel bei einem KI-Anbieter; dessen Nutzung rechnet der Anbieter direkt mit dir ab."}}, {"@type": "Question", "name": "Welche KI-Anbieter werden unterstützt?", "acceptedAnswer": {"@type": "Answer", "text": "oneAI, OpenAI, Google Gemini und Mistral für Spracherkennung und Text, Anthropic (Claude) für die Textaufbereitung. Fällt einer aus, übernimmt automatisch der nächste eingerichtete."}}, {"@type": "Question", "name": "Wohin gehen meine Aufnahmen?", "acceptedAnswer": {"@type": "Answer", "text": "Nur während des Diktats und direkt von deinem PC an den Anbieter, den du selbst eingerichtet hast. Es gibt keinen Server dazwischen. Glossar, Stil und Verlauf bleiben auf deinem PC."}}, {"@type": "Question", "name": "Brauche ich Administratorrechte oder .NET?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Wortlaut ist eine einzelne Programmdatei mit eingebauter Laufzeit und läuft ohne Installation und ohne Adminrechte."}}, {"@type": "Question", "name": "Warum warnt Windows beim ersten Start?", "acceptedAnswer": {"@type": "Answer", "text": "Die Datei ist noch nicht digital signiert. Prüfe die veröffentlichte SHA-256-Prüfsumme und wähle dann „Weitere Informationen → Trotzdem ausführen“."}}, {"@type": "Question", "name": "Funktioniert Wortlaut in jedem Programm?", "acceptedAnswer": {"@type": "Answer", "text": "In fast allen: E-Mail, Teams, Slack, Browser, Office, Ticketsysteme und KI-Chats. Der Text wird dort eingefügt, wo dein Cursor steht."}}]}]</script>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+<header class="kopf">
+  <div class="rahmen kopf-innen">
+    <a class="marke" href="/">Thomas <em>Oesterle</em></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="/#projekte">Projekte</a>
+      <a href="/wortlaut/">Wortlaut</a>
+      <a href="/#ueber">Über mich</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+<main id="inhalt">
+
+<section class="held">
+  <div class="rahmen zwei mitte">
+    <div>
+      <p class="vorzeile">Diktier-App für Windows · kostenlos</p>
+      <h1>Gesagt. <em>Geschrieben.</em></h1>
+      <p class="einleitung">Wortlaut macht aus deiner Sprache sauberen Text – ohne Füllwörter, mit Satzzeichen, im richtigen Ton – und fügt ihn direkt dort ein, wo du gerade schreibst.</p>
+      <p class="aktionen"><a class="knopf" href="https://github.com/tho3mes/wortlaut-releases/releases/latest" rel="noopener">Kostenlos herunterladen</a> <a class="knopf zweit" href="#funktionen">So funktioniert’s</a></p>
+      <p class="leise">Windows 10 und 11 · keine Installation · keine Adminrechte</p>
+    </div>
+    <div class="vorschau" aria-hidden="true">
+      <div class="status">
+        <span class="punkt"></span><span>Aufnahme · Diktat</span><span class="zeit">0:07</span>
+      </div>
+      <div class="pegel"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="modi"><b>D</b><span>E</span><span>P</span><span>C</span></div>
+      <p class="ergebnis">„Hallo Jana, ich schicke dir die Unterlagen bis Donnerstag. Viele Grüße, Thomas“</p>
+    </div>
+  </div>
+</section>
+
+<section id="funktionen" class="abschnitt">
+  <div class="rahmen">
+    <h2>Ein Kürzel, ein Satz, fertig</h2>
+    <div class="raster drei">
+      <div class="karte"><span class="nr">1</span><h3>Kürzel drücken</h3><p>Standard ist <kbd>Num /</kbd> auf dem Ziffernblock. Frei belegbar.</p></div>
+      <div class="karte"><span class="nr">2</span><h3>Einfach sprechen</h3><p>Versprecher und „ähm“ sind egal – auch Selbstkorrekturen wie „Montag, nein Dienstag“.</p></div>
+      <div class="karte"><span class="nr">3</span><h3>Text ist da</h3><p>Aufbereitet und direkt eingefügt: in Mail, Chat, Dokument oder Ticket.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="abschnitt sanft">
+  <div class="rahmen">
+    <h2>Modi für jeden Zweck</h2>
+    <div class="raster drei">
+      <div class="karte"><h3>Diktat</h3><p>Sauberer Fließtext in deinem Tonfall.</p></div>
+      <div class="karte"><h3>Nachricht &amp; Mail</h3><p>Kurz für Chats, mit Anrede und Gruß für E-Mails.</p></div>
+      <div class="karte"><h3>Prompt</h3><p>Aus einer gesprochenen Idee wird ein klarer Prompt für ChatGPT &amp; Co.</p></div>
+      <div class="karte"><h3>Englisch</h3><p>Deutsch sprechen, natürliches US-Englisch erhalten.</p></div>
+      <div class="karte"><h3>Stichpunkte &amp; Task</h3><p>Gedanken als Liste oder als Aufgabenbeschreibung.</p></div>
+      <div class="karte"><h3>Umschreiben</h3><p>Text markieren, Anweisung sprechen: kürzer, freundlicher, förmlicher.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="abschnitt">
+  <div class="rahmen zwei">
+    <div>
+      <h2>Deine KI, deine Wahl</h2>
+      <p>Wortlaut arbeitet mit <strong>oneAI, OpenAI, Google Gemini, Mistral</strong> und <strong>Anthropic Claude</strong>. Du trägst deinen eigenen API-Schlüssel ein; fällt ein Anbieter aus oder ist er zu langsam, springt automatisch der nächste ein.</p>
+      <p>Ein persönliches <strong>Glossar</strong> sorgt dafür, dass Namen und Fachbegriffe stimmen. Dein <strong>Stil</strong> – Du oder Sie, Grußformel, Länge – wird bei jedem Text berücksichtigt.</p>
+    </div>
+    <div>
+      <h2>Datensparsam gebaut</h2>
+      <ul class="punkte">
+        <li>Kein Server dazwischen: Audio geht nur während des Diktats direkt an deinen Anbieter.</li>
+        <li>Glossar, Stil und Verlauf bleiben auf deinem PC; der Verlauf ist verschlüsselt und nach 24 Stunden weg.</li>
+        <li>Schlüssel liegen in der Windows-Anmeldeinformationsverwaltung.</li>
+        <li>Updates mit Prüfsummenkontrolle, nur nach Rückfrage.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Werbefläche (vorbereitet, inaktiv): erst nach Einwilligungsbanner und AdSense-Freigabe einbauen, siehe README.md -->
+
+<section class="abschnitt sanft">
+  <div class="rahmen">
+    <h2>In zwei Minuten startklar</h2>
+    <ol class="schritte">
+      <li><a href="https://github.com/tho3mes/wortlaut-releases/releases/latest" rel="noopener">Wortlaut.exe herunterladen</a> und in einen eigenen Ordner legen, z. B. <code>%LOCALAPPDATA%\Programs\Wortlaut</code>.</li>
+      <li>Starten – das Symbol erscheint im Infobereich der Taskleiste.</li>
+      <li>Unter „Meine Schlüssel“ einen API-Schlüssel eintragen, speichern, fertig.</li>
+    </ol>
+    <p class="leise">Prüfsumme, Nutzungsbedingungen, Datenschutzhinweise und Versionshistorie findest du im <a href="https://github.com/tho3mes/wortlaut-releases" rel="noopener">Release-Repository auf GitHub</a>.</p>
+  </div>
+</section>
+
+<section class="abschnitt">
+  <div class="rahmen schmal">
+    <h2>Häufige Fragen</h2>
+    <details><summary>Ist Wortlaut wirklich kostenlos?</summary><p>Ja. Wortlaut selbst kostet nichts. Für die Spracherkennung brauchst du einen eigenen API-Schlüssel bei einem KI-Anbieter; dessen Nutzung rechnet der Anbieter direkt mit dir ab.</p></details>
+<details><summary>Welche KI-Anbieter werden unterstützt?</summary><p>oneAI, OpenAI, Google Gemini und Mistral für Spracherkennung und Text, Anthropic (Claude) für die Textaufbereitung. Fällt einer aus, übernimmt automatisch der nächste eingerichtete.</p></details>
+<details><summary>Wohin gehen meine Aufnahmen?</summary><p>Nur während des Diktats und direkt von deinem PC an den Anbieter, den du selbst eingerichtet hast. Es gibt keinen Server dazwischen. Glossar, Stil und Verlauf bleiben auf deinem PC.</p></details>
+<details><summary>Brauche ich Administratorrechte oder .NET?</summary><p>Nein. Wortlaut ist eine einzelne Programmdatei mit eingebauter Laufzeit und läuft ohne Installation und ohne Adminrechte.</p></details>
+<details><summary>Warum warnt Windows beim ersten Start?</summary><p>Die Datei ist noch nicht digital signiert. Prüfe die veröffentlichte SHA-256-Prüfsumme und wähle dann „Weitere Informationen → Trotzdem ausführen“.</p></details>
+<details><summary>Funktioniert Wortlaut in jedem Programm?</summary><p>In fast allen: E-Mail, Teams, Slack, Browser, Office, Ticketsysteme und KI-Chats. Der Text wird dort eingefügt, wo dein Cursor steht.</p></details>
+  </div>
+</section>
+
+<section class="abschnitt sanft">
+  <div class="rahmen">
+    <h2>Feedback</h2>
+    <p>Am schnellsten direkt in der App über <em>Tray → Feedback senden</em>. Oder per E-Mail:</p>
+    <p><a class="knopf" data-m="ed.liame@elretseo" href="#kontakt">E-Mail schreiben</a><noscript><p class="leise">oesterle [at] email [punkt] de</p></noscript></p>
+  </div>
+</section>
+
+</main>
+<footer class="fuss">
+  <div class="rahmen fuss-innen">
+    <p>© <span data-jahr>2026</span> Thomas Oesterle · Kostenlose Werkzeuge, ohne Tracking.</p>
+    <p><a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a> · <a href="https://github.com/tho3mes" rel="noopener">GitHub</a></p>
+  </div>
+</footer>
+</body>
+</html>
