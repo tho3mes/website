@@ -88,3 +88,7 @@ dialog.extern .aktionen{margin:20px 0 0}
 button.knopf{border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;line-height:inherit}
 button.knopf.zweit{border:1px solid var(--linie)}
 a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em;color:var(--stein)}
+
+/* Produktlogo */
+.produktlogo{display:block;width:92px;height:92px;margin:0 0 18px}
+.karte .produktlogo{width:52px;height:52px;margin:0 0 12px}
