@@ -1,4 +1,4 @@
-﻿# oesterle.cloud
+# oesterle.cloud
 
 Statische Projektseite von Thomas Oesterle, ausgeliefert über GitHub Pages. Kein Build, kein CMS: HTML und CSS.
 
@@ -8,7 +8,7 @@ Statische Projektseite von Thomas Oesterle, ausgeliefert über GitHub Pages. Kei
 - [ ] Domain in `CNAME` prüfen (aktuell: `oesterle.cloud`)
 
 ## Unterstützen-Link
-Ko-fi-Konto anlegen und in allen HTML-Dateien `ko-fi.com/tho3mes` durch den eigenen Namen ersetzen.
+Ko-fi-Profil: `ko-fi.com/tho3mes` (in index.html und wortlaut/index.html).
 
 ## Neues Projekt ergänzen
 1. Ordner `projektname/` mit `index.html` anlegen (Vorlage: `wortlaut/index.html`).

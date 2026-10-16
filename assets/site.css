@@ -77,3 +77,14 @@ details p{color:var(--stein);margin:8px 0 0 22px}
 .fuss p{margin:0}
 @media (max-width:640px){nav a:not(:last-child){display:none}.abschnitt{padding:56px 0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Hinweis beim Verlassen der Website */
+dialog.extern{max-width:470px;width:calc(100% - 32px);border:1px solid var(--linie);border-radius:18px;padding:28px 28px 22px;background:var(--flaeche);color:var(--tinte);box-shadow:0 30px 60px -20px rgba(22,22,26,.35)}
+dialog.extern::backdrop{background:rgba(22,22,26,.45);backdrop-filter:blur(2px)}
+dialog.extern h2{font-size:32px;margin-bottom:.4em}
+dialog.extern p{color:var(--stein);margin:0 0 .6em}
+dialog.extern strong{color:var(--tinte)}
+dialog.extern .aktionen{margin:20px 0 0}
+button.knopf{border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;line-height:inherit}
+button.knopf.zweit{border:1px solid var(--linie)}
+a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em;color:var(--stein)}
