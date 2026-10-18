@@ -56,12 +56,12 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var ablaeufe = {
     mail: [
-      { modus: 'D', betreff: 'Unterlagen',
+      { an: 'Jana', betreff: 'Unterlagen',
         gesprochen: '„Ähm, hallo Jana, ich schick dir die Unterlagen bis Montag, nein, Donnerstag. Viele Grüße, Thomas“',
         text: ['Hallo Jana,', '', 'ich schicke dir die Unterlagen bis Donnerstag.', '', 'Viele Grüße', 'Thomas'] },
-      { modus: 'E', betreff: 'Documents',
-        gesprochen: '„Hallo Jana, die Unterlagen kommen bis Donnerstag, Gruß Thomas“',
-        text: ['Hi Jana,', '', 'I’ll send you the documents by Thursday.', '', 'Best regards,', 'Thomas'] }
+      { an: 'Herr Weber', betreff: 'Ihr Angebot',
+        gesprochen: '„Mail an Herrn Weber, danke fürs Gespräch, Angebot kommt bis Freitag, Gruß Thomas“',
+        text: ['Sehr geehrter Herr Weber,', '', 'vielen Dank für das Gespräch. Ihr Angebot folgt bis Freitag.', '', 'Mit freundlichen Grüßen', 'Thomas Oesterle'] }
     ],
     prompt: [
       { gesprochen: '„Ähm, mach mir einen Prompt: Die KI soll meine Notizen vom Kundentermin zusammenfassen, Entscheidungen, offene Punkte, nächste Schritte, kurz bitte“',
@@ -99,7 +99,7 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
     var q = {
       taste: el.querySelector('[data-taste]'), status: el.querySelector('[data-status]'),
       zeit: el.querySelector('[data-zeit]'), gesprochen: el.querySelector('[data-gesprochen]'),
-      text: el.querySelector('[data-text]'), betreff: el.querySelector('[data-betreff]'),
+      text: el.querySelector('[data-text]'), betreff: el.querySelector('[data-betreff]'), an: el.querySelector('[data-an]'),
       modi: el.querySelectorAll('[data-modus]')
     };
     if (!q.taste || !q.status || !q.zeit || !q.gesprochen || !q.text) return;
@@ -141,6 +141,7 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
       var s = ablauf[nr++ % ablauf.length];
       if (s.modus) Array.prototype.forEach.call(q.modi, function (m) { m.classList.toggle('aktiv', m.getAttribute('data-modus') === s.modus); });
       if (s.betreff && q.betreff) q.betreff.textContent = s.betreff;
+      if (s.an && q.an) q.an.textContent = s.an;
       q.taste.classList.remove('gedrueckt');
       zustand('bereit', 'Bereit');
       q.zeit.textContent = '0:00';
