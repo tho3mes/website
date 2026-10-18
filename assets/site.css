@@ -96,3 +96,33 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 /* Werkstatt: Projekte in Arbeit, noch nicht veröffentlicht */
 .karte p.stand{margin-top:16px;font-size:13px;letter-spacing:.04em;color:var(--tinte);opacity:.7}
 .werkstatt-fuss{margin-top:22px}
+
+/* Animierte Szene: Illustration des Ablaufs, kein Video (Logik in site.js) */
+.szene{display:flex;flex-direction:column;gap:14px}
+.szene-leiste{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--stein)}
+.szene-leiste .zeit{margin-left:auto;font-variant-numeric:tabular-nums}
+.szene kbd{transition:transform .12s,border-color .12s,color .12s}
+.szene kbd.gedrueckt{transform:translateY(2px);border-color:var(--signal);color:var(--signal)}
+.szene .punkt{background:var(--linie);animation-name:none}
+.szene[data-zustand="aufnahme"] .punkt{background:var(--signal);animation-name:puls}
+.szene[data-zustand="denkt"] .punkt{background:var(--stein);animation-name:puls}
+.szene[data-zustand="fertig"] .punkt{background:var(--tinte)}
+.szene .pegel{height:40px;margin:0}
+.szene .pegel i{height:14%;animation-name:none;transition:height .3s}
+.szene[data-zustand="aufnahme"] .pegel i{animation-name:welle}
+.szene-gesprochen{margin:0;min-height:3.3em;font-size:14px;line-height:1.55;font-style:italic;color:var(--stein);transition:opacity .4s}
+.szene-gesprochen.weg{opacity:.35}
+.szene-fenster{background:var(--papier);border:1px solid var(--linie);border-radius:14px;padding:12px 16px 16px}
+.szene-kopf{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--stein);margin-bottom:8px}
+.szene-kopf i{width:9px;height:9px;border-radius:50%;background:var(--linie)}
+.szene-kopf span{margin-left:8px}
+.szene-feld{font-size:13px;color:var(--stein);border-bottom:1px solid var(--linie);padding:5px 0}
+.szene-feld b{font-weight:500;color:var(--tinte);margin-left:4px}
+.szene-text{margin:12px 0 0;min-height:10.2em;font:19px/1.45 var(--serif)}
+.szene-text .zeile{display:block;min-height:1.45em}
+.szene .wort{opacity:0;transition:opacity .25s}
+.szene .wort.da{opacity:1}
+.szene-fuss{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.modi .aktiv{border-color:var(--signal);color:var(--signal)}
+.szene-hinweis{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stein)}
+.raster.mit-szene{align-items:start}
