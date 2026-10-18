@@ -90,6 +90,17 @@ details p{color:var(--stein);margin:8px 0 0 24px}
 .fakten li{margin:0;font-size:15px;line-height:1.5;color:var(--stein)}
 .fakten b{display:block;font:400 40px/1 var(--serif);color:var(--tinte);margin-bottom:8px}
 
+/* Kontaktformular: zweiter schneller Kontaktweg (§ 5 DDG), Versand ueber worker/ */
+.formular{display:grid;gap:8px;align-content:start}
+.formular label{font-size:15px;font-weight:var(--label);margin-top:8px}
+.formular label:first-child{margin-top:0}
+.formular input,.formular textarea{width:100%;font:inherit;color:var(--tinte);background:var(--flaeche);border:1px solid var(--stein);border-radius:12px;padding:12px 16px}
+.formular textarea{resize:vertical;min-height:160px}
+.formular input:focus-visible,.formular textarea:focus-visible{outline:2px solid var(--akzent);outline-offset:2px}
+.formular .leise{margin:8px 0}
+.formular .knopf{justify-self:start}
+.honig{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
 /* Hinweis beim Verlassen der Website */
 dialog.extern{max-width:470px;width:calc(100% - 32px);border:1px solid var(--linie);border-radius:18px;padding:28px 28px 24px;background:var(--flaeche);color:var(--tinte);box-shadow:0 30px 60px -20px rgba(22,22,26,.35)}
 dialog.extern::backdrop{background:rgba(22,22,26,.45);backdrop-filter:blur(2px)}
@@ -164,19 +175,19 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 
 /* Neuigkeiten: dezenter Hinweis, Neu-Zeile in der Projektkarte, Versionsverlauf (gepflegt von tools/neuigkeiten.py) */
 .neu-hinweis{margin:0 0 16px}
-.neu-hinweis a{display:inline-flex;align-items:center;gap:10px;max-width:100%;font-size:13px;line-height:1.4;color:var(--stein);text-decoration:none;border:1px solid var(--linie);border-radius:999px;padding:4px 14px 4px 4px;background:var(--flaeche);transition:border-color .15s,color .15s}
+.neu-hinweis a{display:inline-flex;align-items:center;gap:8px;max-width:100%;font-size:13px;line-height:1.4;color:var(--stein);text-decoration:none;border:1px solid var(--linie);border-radius:999px;padding:4px 16px 4px 4px;background:var(--flaeche);transition:border-color .15s,color .15s}
 .neu-hinweis a:hover{border-color:var(--signal);color:var(--tinte)}
-.neu-marke{flex:none;background:var(--signal);color:#fff;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.neu-zeile{display:inline-flex;align-items:center;gap:8px;margin:0 0 10px 12px;font-size:12px;color:var(--stein);vertical-align:top}
-.versionen{list-style:none;padding:0;margin:28px 0 18px}
+.neu-marke{flex:none;background:var(--knopf);color:#fff;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:var(--label);letter-spacing:.08em;text-transform:uppercase}
+.neu-zeile{display:inline-flex;align-items:center;gap:8px;margin:0 0 8px 12px;font-size:12px;color:var(--stein);vertical-align:top}
+.versionen{list-style:none;padding:0;margin:28px 0 16px}
 .versionen>li{padding:16px 0;border-bottom:1px solid var(--linie)}
 .versionen>li:first-child{padding-top:0}
-.version-kopf{display:flex;align-items:baseline;gap:14px;margin:0}
+.version-kopf{display:flex;align-items:baseline;gap:16px;margin:0}
 .version-kopf b{font:400 24px/1.1 var(--serif)}
 .version-kopf span{font-size:13px;color:var(--stein);font-variant-numeric:tabular-nums}
 .version-kurz{margin:4px 0 0;color:var(--stein)}
-.aktuell .version-kopf b{color:var(--signal)}
+.aktuell .version-kopf b{color:var(--akzent)}
 .aktuell .version-kurz{color:var(--tinte)}
 .version-punkte{margin:12px 0 0;padding-left:20px;color:var(--stein)}
-.version-punkte li{margin:6px 0}
+.version-punkte li{margin:8px 0}
 .version-punkte strong{color:var(--tinte);font-weight:600}
