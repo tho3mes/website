@@ -47,20 +47,36 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
   });
 })();
 
-// Animierte Szene (Illustration, kein Video): Kürzel drücken, sprechen, KI bereitet auf, Text erscheint.
-// Läuft nur, solange sie sichtbar ist. Bei „Bewegung reduzieren“ oder ohne JavaScript bleibt das Standbild aus dem HTML stehen.
+// Animierte Szenen (Illustration, kein Video): Kürzel drücken, sprechen, KI bereitet auf, Text erscheint.
+// Typ über data-szene: leer/mail, prompt, englisch, umschreiben. Startet erst, wenn die Szene ins Bild scrollt,
+// und pausiert außerhalb. Bei „Bewegung reduzieren“ oder ohne JavaScript bleibt das Standbild aus dem HTML stehen.
 (function () {
   var szenen = document.querySelectorAll('[data-szene]');
   if (!szenen.length) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var ablauf = [
-    { modus: 'D', betreff: 'Unterlagen',
-      gesprochen: '„Ähm, hallo Jana, ich schick dir die Unterlagen bis Montag, nein, Donnerstag. Viele Grüße, Thomas“',
-      text: ['Hallo Jana,', '', 'ich schicke dir die Unterlagen bis Donnerstag.', '', 'Viele Grüße', 'Thomas'] },
-    { modus: 'E', betreff: 'Documents',
-      gesprochen: '„Hallo Jana, die Unterlagen kommen bis Donnerstag, Gruß Thomas“',
-      text: ['Hi Jana,', '', 'I’ll send you the documents by Thursday.', '', 'Best regards,', 'Thomas'] }
-  ];
+  var ablaeufe = {
+    mail: [
+      { modus: 'D', betreff: 'Unterlagen',
+        gesprochen: '„Ähm, hallo Jana, ich schick dir die Unterlagen bis Montag, nein, Donnerstag. Viele Grüße, Thomas“',
+        text: ['Hallo Jana,', '', 'ich schicke dir die Unterlagen bis Donnerstag.', '', 'Viele Grüße', 'Thomas'] },
+      { modus: 'E', betreff: 'Documents',
+        gesprochen: '„Hallo Jana, die Unterlagen kommen bis Donnerstag, Gruß Thomas“',
+        text: ['Hi Jana,', '', 'I’ll send you the documents by Thursday.', '', 'Best regards,', 'Thomas'] }
+    ],
+    prompt: [
+      { gesprochen: '„Ähm, mach mir einen Prompt: Die KI soll meine Notizen vom Kundentermin zusammenfassen, Entscheidungen, offene Punkte, nächste Schritte, kurz bitte“',
+        text: ['Fasse meine Notizen aus dem Kundentermin zusammen.', '', 'Gliederung: Entscheidungen, offene Punkte, nächste Schritte.', 'Höchstens acht Stichpunkte, sachlicher Ton.', '', 'Notizen:'] }
+    ],
+    englisch: [
+      { gesprochen: '„Hi Mark, kurze Info, die Lieferung verschiebt sich auf nächsten Dienstag, ich melde mich, sobald ich mehr weiß“',
+        text: ['Hi Mark,', '', 'quick heads-up: the delivery has moved to next Tuesday.', 'I’ll get back to you as soon as I know more.'] }
+    ],
+    umschreiben: [
+      { vorher: 'Wie bereits mehrfach mitgeteilt, benötigen wir die Unterlagen zwingend bis Freitag. Andernfalls können wir den Termin nicht halten.',
+        gesprochen: '„Freundlicher und kürzer, bitte“',
+        text: ['Kurze Erinnerung: Schickst du mir die Unterlagen bis Freitag? Dann klappt unser Termin sicher.'] }
+    ]
+  };
   function woerter(ziel, zeilen) {
     var liste = [];
     ziel.textContent = '';
@@ -79,13 +95,14 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
     return liste;
   }
   Array.prototype.forEach.call(szenen, function (el) {
+    var ablauf = ablaeufe[el.getAttribute('data-szene')] || ablaeufe.mail;
     var q = {
       taste: el.querySelector('[data-taste]'), status: el.querySelector('[data-status]'),
       zeit: el.querySelector('[data-zeit]'), gesprochen: el.querySelector('[data-gesprochen]'),
       text: el.querySelector('[data-text]'), betreff: el.querySelector('[data-betreff]'),
       modi: el.querySelectorAll('[data-modus]')
     };
-    if (!q.taste || !q.status || !q.zeit || !q.gesprochen || !q.text || !q.betreff) return;
+    if (!q.taste || !q.status || !q.zeit || !q.gesprochen || !q.text) return;
     var nr = 0, timer = null, uhr = null, laeuft = false, sichtbar = false;
     function warte(ms, fn) { timer = setTimeout(function () { if (laeuft) fn(); }, ms); }
     function zustand(z, label) { el.setAttribute('data-zustand', z); q.status.textContent = label; }
@@ -99,35 +116,49 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
       q.taste.classList.add('gedrueckt');
       warte(220, function () { q.taste.classList.remove('gedrueckt'); fn(); });
     }
+    function diktat(s) {
+      tippen(function () {
+        zustand('aufnahme', 'Aufnahme');
+        var sek = 0;
+        uhr = setInterval(function () { sek++; q.zeit.textContent = '0:0' + Math.min(sek, 9); }, 1000);
+        zeige(woerter(q.gesprochen, [s.gesprochen]), 170, function () {
+          warte(450, function () {
+            clearInterval(uhr);
+            tippen(function () {
+              zustand('denkt', 'Aufbereitung …');
+              warte(1100, function () {
+                q.gesprochen.classList.add('weg');
+                q.text.classList.remove('markiert');
+                zustand('fertig', s.vorher ? 'Ersetzt' : 'Eingefügt');
+                zeige(woerter(q.text, s.text), 75, function () { warte(3800, runde); });
+              });
+            });
+          });
+        });
+      });
+    }
     function runde() {
       var s = ablauf[nr++ % ablauf.length];
-      Array.prototype.forEach.call(q.modi, function (m) { m.classList.toggle('aktiv', m.getAttribute('data-modus') === s.modus); });
-      q.betreff.textContent = s.betreff;
+      if (s.modus) Array.prototype.forEach.call(q.modi, function (m) { m.classList.toggle('aktiv', m.getAttribute('data-modus') === s.modus); });
+      if (s.betreff && q.betreff) q.betreff.textContent = s.betreff;
       q.taste.classList.remove('gedrueckt');
       zustand('bereit', 'Bereit');
       q.zeit.textContent = '0:00';
       q.gesprochen.textContent = '';
       q.gesprochen.classList.remove('weg');
+      q.text.classList.remove('markiert');
       q.text.textContent = '';
+      if (s.vorher) {
+        var a = document.createElement('span');
+        a.className = 'auswahl';
+        a.textContent = s.vorher;
+        q.text.appendChild(a);
+      }
       warte(1100, function () {
-        tippen(function () {
-          zustand('aufnahme', 'Aufnahme');
-          var sek = 0;
-          uhr = setInterval(function () { sek++; q.zeit.textContent = '0:0' + Math.min(sek, 9); }, 1000);
-          zeige(woerter(q.gesprochen, [s.gesprochen]), 170, function () {
-            warte(450, function () {
-              clearInterval(uhr);
-              tippen(function () {
-                zustand('denkt', 'Aufbereitung …');
-                warte(1100, function () {
-                  q.gesprochen.classList.add('weg');
-                  zustand('fertig', 'Eingefügt');
-                  zeige(woerter(q.text, s.text), 75, function () { warte(3800, runde); });
-                });
-              });
-            });
-          });
-        });
+        if (!s.vorher) { diktat(s); return; }
+        q.text.classList.add('markiert');
+        zustand('bereit', 'Text markiert');
+        warte(1000, function () { diktat(s); });
       });
     }
     function start() { if (laeuft) return; laeuft = true; runde(); }
