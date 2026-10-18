@@ -1,0 +1,36 @@
+# GEHOERT NACH .github/workflows/neuigkeiten.yml (Datei auf GitHub oeffnen, Stift, Dateiname/Pfad aendern, Commit).
+# Uebernimmt neue Wortlaut-Releases dezent auf oesterle.cloud: Hinweis im Kopf der Wortlaut-Seite (45 Tage),
+# Eintrag unter "Was ist neu", kleine Zeile in der Projektkarte, softwareVersion und Sitemap. Logik: tools/neuigkeiten.py
+# Laeuft taeglich, per "Run workflow" sofort, oder per repository_dispatch (Typ wortlaut-release).
+name: neuigkeiten
+
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [wortlaut-release]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: neuigkeiten
+  cancel-in-progress: false
+
+jobs:
+  aktualisieren:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Neue Releases uebernehmen
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/neuigkeiten.py
+      - name: Committen, falls sich etwas geaendert hat
+        run: |
+          if git diff --quiet; then echo "Keine Aenderung"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Neuigkeiten: Wortlaut-Release uebernommen"
+          git push
