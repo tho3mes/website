@@ -6,7 +6,7 @@
 <title>Thomas Oesterle – kostenlose Werkzeuge für Windows und KI</title>
 <meta name="description" content="Kostenlose, datensparsame Werkzeuge von Thomas Oesterle – darunter Wortlaut, die Diktier-App mit KI-Aufbereitung für Windows. Weitere Werkzeuge für Englisch, Schule und Lernförderung sind in Arbeit.">
 <link rel="canonical" href="https://oesterle.cloud/">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self' https://kontakt.oesterle.cloud">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#F7F5F0">
 <meta property="og:type" content="website">
@@ -60,9 +60,6 @@
       <a class="karte" href="/wortlaut/">
         <picture><source srcset="/assets/wortlaut-logo-hell-256.png" media="(prefers-color-scheme: dark)"><img class="produktlogo" src="/assets/wortlaut-logo-256.png" alt="Wortlaut-Logo" width="52" height="52"></picture>
         <span class="etikett">Windows · kostenlos</span>
-        <!-- neu:karte:start -->
-        <span class="neu-zeile"><span class="neu-marke">Neu</span>Version 2.1</span>
-        <!-- neu:karte:end -->
         <h3>Wortlaut</h3>
         <p>Sprechen statt tippen: Diktat mit KI-Aufbereitung, direkt in jedes Programm. Mit dem KI-Anbieter deiner Wahl.</p>
         <span class="mehr">Mehr erfahren →</span>
@@ -179,10 +176,23 @@
 </section>
 
 <section id="kontakt" class="abschnitt">
-  <div class="rahmen">
-    <h2>Kontakt</h2>
-    <p>Fragen, Ideen oder Feedback zu einem Projekt? Schreib mir gern eine E-Mail.</p>
-    <p><a class="knopf" data-m="duolc.elretseo@kcabdeef" href="#kontakt">E-Mail schreiben</a><noscript><p class="leise">feedback [at] oesterle [punkt] cloud</p></noscript></p>
+  <div class="rahmen zwei">
+    <div>
+      <h2>Kontakt</h2>
+      <p>Fragen, Ideen oder Feedback zu einem Projekt? Schreib mir über das Formular, ich antworte per E-Mail. Lieber direkt aus dem eigenen Postfach? Geht auch.</p>
+      <p><a class="knopf zweit" data-m="duolc.elretseo@kcabdeef" href="#kontakt">E-Mail schreiben</a><noscript><p class="leise">feedback [at] oesterle [punkt] cloud</p></noscript></p>
+    </div>
+    <form class="formular" action="https://kontakt.oesterle.cloud/" method="post" accept-charset="utf-8">
+      <label for="k-name">Name <span class="leise">(freiwillig)</span></label>
+      <input id="k-name" name="name" autocomplete="name" maxlength="100">
+      <label for="k-email">E-Mail für die Antwort</label>
+      <input id="k-email" name="email" type="email" autocomplete="email" required maxlength="200">
+      <label for="k-nachricht">Nachricht</label>
+      <textarea id="k-nachricht" name="nachricht" rows="6" required minlength="5" maxlength="5000"></textarea>
+      <div class="honig" aria-hidden="true"><label for="k-website">Website</label><input id="k-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="leise">Die Nachricht wird über Cloudflare per E-Mail an mich weitergeleitet und dort nicht gespeichert. Mehr dazu im <a href="/datenschutz/">Datenschutz</a>.</p>
+      <button class="knopf" type="submit">Nachricht senden</button>
+    </form>
   </div>
 </section>
 

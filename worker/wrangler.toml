@@ -1,0 +1,22 @@
+name = "oesterle-kontakt"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = false
+
+# Eigene Subdomain: Cloudflare legt DNS-Eintrag und Zertifikat selbst an
+routes = [{ pattern = "kontakt.oesterle.cloud", custom_domain = true }]
+
+# Versand über Cloudflare Email Routing. Die Zieladresse muss dort als verifizierte Zieladresse hinterlegt sein.
+[[send_email]]
+name = "MAIL"
+
+[vars]
+ABSENDER = "formular@oesterle.cloud"
+ERLAUBT = "https://oesterle.cloud"
+DANKE = "https://oesterle.cloud/kontakt/danke/"
+# ZIEL (Empfängeradresse) steht bewusst nicht hier, weil dieses Repo öffentlich ist:
+#   npx wrangler secret put ZIEL
+
+# Keine Logs: Formularinhalte sollen nirgends liegen bleiben
+[observability]
+enabled = false
