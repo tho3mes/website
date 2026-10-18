@@ -143,3 +143,9 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 .szene .auswahl{border-radius:4px;transition:background .3s}
 .szene .markiert .auswahl{background:color-mix(in srgb,var(--signal) 24%,transparent)}
 .szene-modus{font-size:13px;color:var(--signal);border:1px solid var(--signal);border-radius:999px;padding:3px 12px}
+
+/* Startseite: Szenen im Wechsel, gestapelt in einer Rasterzelle (kein Höhensprung, sanfte Überblendung) */
+.szenen-wechsel{display:grid}
+.szenen-wechsel>.szene{grid-area:1/1;transition:opacity .5s,visibility .5s}
+.szenen-wechsel>.szene.ruht{opacity:0;visibility:hidden}
+.szenen-wechsel .szene-fuss{margin-top:auto}

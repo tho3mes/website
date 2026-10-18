@@ -130,7 +130,7 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
                 q.gesprochen.classList.add('weg');
                 q.text.classList.remove('markiert');
                 zustand('fertig', s.vorher ? 'Ersetzt' : 'Eingefügt');
-                zeige(woerter(q.text, s.text), 75, function () { warte(3800, runde); });
+                zeige(woerter(q.text, s.text), 75, function () { warte(3800, naechste); });
               });
             });
           });
@@ -161,16 +161,37 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
         warte(1000, function () { diktat(s); });
       });
     }
+    // Nach jeder Runde: Ein Szenenwechsel (Startseite) kann übernehmen, sonst startet die nächste Runde.
+    function naechste() {
+      var ev = new CustomEvent('szene:fertig', { bubbles: true, cancelable: true });
+      if (el.dispatchEvent(ev)) runde(); else stopp();
+    }
+    function darf() { return sichtbar && !document.hidden && !el.classList.contains('ruht'); }
     function start() { if (laeuft) return; laeuft = true; runde(); }
     function stopp() { laeuft = false; clearTimeout(timer); clearInterval(uhr); }
+    el.addEventListener('szene:start', function () { if (darf()) start(); });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (e) {
         sichtbar = e[0].isIntersecting;
-        if (sichtbar && !document.hidden) start(); else stopp();
+        if (darf()) start(); else stopp();
       }, { threshold: 0.3 }).observe(el);
-    } else { sichtbar = true; start(); }
+    } else { sichtbar = true; if (darf()) start(); }
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stopp(); else if (sichtbar) start();
+      if (document.hidden) stopp(); else if (darf()) start();
+    });
+  });
+  // Szenenwechsel: mehrere Szenen liegen übereinander, immer eine ist aktiv, nach jeder Runde kommt die nächste.
+  Array.prototype.forEach.call(document.querySelectorAll('[data-szenenwechsel]'), function (w) {
+    var teile = w.querySelectorAll('[data-szene]');
+    if (teile.length < 2) return;
+    var i = 0;
+    w.addEventListener('szene:fertig', function (e) {
+      if (e.target !== teile[i]) return;
+      e.preventDefault();
+      teile[i].classList.add('ruht');
+      i = (i + 1) % teile.length;
+      teile[i].classList.remove('ruht');
+      teile[i].dispatchEvent(new CustomEvent('szene:start'));
     });
   });
 })();
