@@ -11,7 +11,7 @@ Statische Projektseite von Thomas Oesterle, ausgeliefert über GitHub Pages. Kei
 Ko-fi-Profil: `ko-fi.com/tho3mes` (in index.html und wortlaut/index.html).
 
 ## Werkstatt (Projekte in Arbeit)
-Abschnitt `#werkstatt` auf der Startseite: gestrichelte Karten (`karte leer`) mit Etikett „Coming soon“ und Zeile `p.stand` (z. B. „Alpha · noch nicht veröffentlicht“). Keine Downloads, keine Unterseite, keine Namen von Kindern. Aktuell: Wortwechsel (Alpha), Wortmeldung, Zeichenatelier. Wird ein Projekt veröffentlicht (eigenes Release-Repo), wandert die Karte nach „Projekte“ und bekommt eine Unterseite.
+Abschnitt `#werkstatt` auf der Startseite: gestrichelte Karten (`karte leer`) mit Etikett „Coming soon“ und Zeile `p.stand` (z. B. „Alpha · noch nicht veröffentlicht“). Keine Downloads, keine Unterseite, keine Namen von Kindern. Aktuell: Wortwechsel (Alpha), Klarschiff (Alpha), Wortmeldung, Zeichenatelier. Wird ein Projekt veröffentlicht (eigenes Release-Repo), wandert die Karte nach „Projekte“ und bekommt eine Unterseite.
 
 ## Neues Projekt ergänzen
 1. Ordner `projektname/` mit `index.html` anlegen (Vorlage: `wortlaut/index.html`).
