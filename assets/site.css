@@ -110,7 +110,7 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 .szene .pegel{height:40px;margin:0}
 .szene .pegel i{height:14%;animation-name:none;transition:height .3s}
 .szene[data-zustand="aufnahme"] .pegel i{animation-name:welle}
-.szene-gesprochen{margin:0;min-height:3.3em;font-size:14px;line-height:1.55;font-style:italic;color:var(--stein);transition:opacity .4s}
+.szene-gesprochen{margin:0;min-height:4.7em;font-size:14px;line-height:1.55;font-style:italic;color:var(--stein);transition:opacity .4s}
 .szene-gesprochen.weg{opacity:.35}
 .szene-fenster{background:var(--papier);border:1px solid var(--linie);border-radius:14px;padding:12px 16px 16px}
 .szene-kopf{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--stein);margin-bottom:8px}
@@ -126,3 +126,20 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 .modi .aktiv{border-color:var(--signal);color:var(--signal)}
 .szene-hinweis{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stein)}
 .raster.mit-szene{align-items:start}
+
+/* Szenen-Reihen auf der Wortlaut-Seite: Modi in Aktion, starten beim Scrollen */
+.reihe{margin-top:40px}
+.reihe+.reihe{margin-top:88px}
+.reihe h3{margin:0 0 .4em}
+.reihe p{max-width:460px}
+@media (min-width:760px){.reihe.umgekehrt>:first-child{order:2}}
+.szene-text.kurz{min-height:8.8em}
+.szene-text.klein{font:15px/1.55 var(--sans);min-height:9.3em}
+.szene-text.klein .zeile{min-height:1.55em}
+.szene-eingabe{display:flex;gap:12px;align-items:flex-end;margin-top:6px;border:1px solid var(--linie);border-radius:12px;padding:10px 12px;background:var(--flaeche)}
+.szene-eingabe .szene-text{margin:0;flex:1}
+.szene-senden{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--signal);color:#fff;font-size:15px}
+.szene-blase{display:inline-block;max-width:85%;margin:4px 0 2px;padding:8px 12px;border-radius:12px 12px 12px 4px;background:var(--sanft);font-size:14px;color:var(--tinte)}
+.szene .auswahl{border-radius:4px;transition:background .3s}
+.szene .markiert .auswahl{background:color-mix(in srgb,var(--signal) 24%,transparent)}
+.szene-modus{font-size:13px;color:var(--signal);border:1px solid var(--signal);border-radius:999px;padding:3px 12px}
