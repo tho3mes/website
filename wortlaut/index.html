@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="/assets/wortlaut-icon-180.png">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Wortlaut", "applicationCategory": "BusinessApplication", "image": "https://oesterle.cloud/assets/wortlaut-logo-512.png", "operatingSystem": "Windows 10, Windows 11", "description": "Diktier-App für Windows: Sprache wird per KI zu sauberem Text und direkt in das aktive Programm eingefügt.", "url": "https://oesterle.cloud/wortlaut/", "downloadUrl": "https://github.com/tho3mes/wortlaut-releases/releases/latest", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Thomas Oesterle", "url": "https://oesterle.cloud"}, "inLanguage": "de"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Ist Wortlaut wirklich kostenlos?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Wortlaut selbst kostet nichts. Für die Spracherkennung brauchst du einen eigenen API-Schlüssel bei einem KI-Anbieter; dessen Nutzung rechnet der Anbieter direkt mit dir ab."}}, {"@type": "Question", "name": "Welche KI-Anbieter werden unterstützt?", "acceptedAnswer": {"@type": "Answer", "text": "oneAI, OpenAI, Google Gemini und Mistral für Spracherkennung und Text, Anthropic (Claude) für die Textaufbereitung. Fällt einer aus, übernimmt automatisch der nächste eingerichtete."}}, {"@type": "Question", "name": "Wohin gehen meine Aufnahmen?", "acceptedAnswer": {"@type": "Answer", "text": "Nur während des Diktats und direkt von deinem PC an den Anbieter, den du selbst eingerichtet hast. Es gibt keinen Server dazwischen. Glossar, Stil und Verlauf bleiben auf deinem PC."}}, {"@type": "Question", "name": "Brauche ich Administratorrechte oder .NET?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Wortlaut ist eine einzelne Programmdatei mit eingebauter Laufzeit und läuft ohne Installation und ohne Adminrechte."}}, {"@type": "Question", "name": "Warum warnt Windows beim ersten Start?", "acceptedAnswer": {"@type": "Answer", "text": "Die Datei ist noch nicht digital signiert. Prüfe die veröffentlichte SHA-256-Prüfsumme und wähle dann „Weitere Informationen → Trotzdem ausführen“."}}, {"@type": "Question", "name": "Funktioniert Wortlaut in jedem Programm?", "acceptedAnswer": {"@type": "Answer", "text": "In fast allen: E-Mail, Teams, Slack, Browser, Office, Ticketsysteme und KI-Chats. Der Text wird dort eingefügt, wo dein Cursor steht."}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Wortlaut", "applicationCategory": "BusinessApplication", "image": "https://oesterle.cloud/assets/wortlaut-logo-512.png", "operatingSystem": "Windows 10, Windows 11", "description": "Diktier-App für Windows: Sprache wird per KI zu sauberem Text und direkt in das aktive Programm eingefügt.", "url": "https://oesterle.cloud/wortlaut/", "downloadUrl": "https://github.com/tho3mes/wortlaut-releases/releases/latest/download/Wortlaut.exe", "sameAs": ["https://github.com/tho3mes/wortlaut-releases"], "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Thomas Oesterle", "url": "https://oesterle.cloud"}, "inLanguage": "de"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Ist Wortlaut wirklich kostenlos?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Wortlaut selbst kostet nichts. Für die Spracherkennung brauchst du einen eigenen API-Schlüssel bei einem KI-Anbieter; dessen Nutzung rechnet der Anbieter direkt mit dir ab."}}, {"@type": "Question", "name": "Welche KI-Anbieter werden unterstützt?", "acceptedAnswer": {"@type": "Answer", "text": "OpenAI, Google Gemini und Mistral für Spracherkennung und Text, Anthropic (Claude) für die Textaufbereitung. Für Unternehmen zusätzlich oneAI. Fällt ein Anbieter aus, übernimmt automatisch der nächste eingerichtete."}}, {"@type": "Question", "name": "Wohin gehen meine Aufnahmen?", "acceptedAnswer": {"@type": "Answer", "text": "Nur während des Diktats und direkt von deinem PC an den Anbieter, den du selbst eingerichtet hast. Es gibt keinen Server dazwischen. Glossar, Stil und Verlauf bleiben auf deinem PC."}}, {"@type": "Question", "name": "Brauche ich Administratorrechte oder .NET?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Wortlaut ist eine einzelne Programmdatei mit eingebauter Laufzeit und läuft ohne Installation und ohne Adminrechte."}}, {"@type": "Question", "name": "Warum warnt Windows beim ersten Start?", "acceptedAnswer": {"@type": "Answer", "text": "Die Datei ist noch nicht digital signiert. Prüfe die veröffentlichte SHA-256-Prüfsumme und wähle dann „Weitere Informationen → Trotzdem ausführen“."}}, {"@type": "Question", "name": "Funktioniert Wortlaut in jedem Programm?", "acceptedAnswer": {"@type": "Answer", "text": "In fast allen: E-Mail, Teams, Slack, Browser, Office, Ticketsysteme und KI-Chats. Der Text wird dort eingefügt, wo dein Cursor steht."}}]}]</script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
@@ -46,8 +46,9 @@
       <p class="vorzeile">Diktier-App für Windows · kostenlos</p>
       <h1>Gesagt. <em>Geschrieben.</em></h1>
       <p class="einleitung">Wortlaut macht aus deiner Sprache sauberen Text – ohne Füllwörter, mit Satzzeichen, im richtigen Ton – und fügt ihn direkt dort ein, wo du gerade schreibst.</p>
-      <p class="aktionen"><a class="knopf" href="https://github.com/tho3mes/wortlaut-releases/releases/latest" target="_blank" rel="noopener noreferrer">Kostenlos herunterladen</a> <a class="knopf zweit" href="#funktionen">So funktioniert’s</a></p>
+      <p class="aktionen"><a class="knopf" href="https://github.com/tho3mes/wortlaut-releases/releases/latest/download/Wortlaut.exe">Kostenlos herunterladen</a> <a class="knopf zweit" href="#funktionen">So funktioniert’s</a></p>
       <p class="leise">Windows 10 und 11 · keine Installation · keine Adminrechte</p>
+      <p class="leise"><strong>Was du brauchst:</strong> einen eigenen API-Schlüssel bei OpenAI, Google Gemini, Mistral oder oneAI. Die Nutzung rechnet der Anbieter direkt mit dir ab, deine Aufnahme geht nur an den Anbieter, den du einträgst. Beim ersten Start warnt Windows, weil die Datei noch nicht signiert ist: <a href="#start">so prüfst du sie</a>.</p>
     </div>
     <div class="vorschau" aria-hidden="true">
       <div class="status">
@@ -89,7 +90,7 @@
   <div class="rahmen zwei">
     <div>
       <h2>Deine KI, deine Wahl</h2>
-      <p>Wortlaut arbeitet mit <strong>oneAI, OpenAI, Google Gemini, Mistral</strong> und <strong>Anthropic Claude</strong>. Du trägst deinen eigenen API-Schlüssel ein; fällt ein Anbieter aus oder ist er zu langsam, springt automatisch der nächste ein.</p>
+      <p>Wortlaut arbeitet mit <strong>OpenAI, Google Gemini, Mistral</strong> und <strong>Anthropic Claude</strong>, für Unternehmen auch mit <strong>oneAI</strong>. Du trägst deinen eigenen API-Schlüssel ein; fällt ein Anbieter aus oder ist er zu langsam, springt automatisch der nächste ein.</p>
       <p>Ein persönliches <strong>Glossar</strong> sorgt dafür, dass Namen und Fachbegriffe stimmen. Dein <strong>Stil</strong> – Du oder Sie, Grußformel, Länge – wird bei jedem Text berücksichtigt.</p>
     </div>
     <div>
@@ -106,11 +107,11 @@
 
 <!-- Werbefläche (vorbereitet, inaktiv): erst nach Einwilligungsbanner und AdSense-Freigabe einbauen, siehe README.md -->
 
-<section class="abschnitt sanft">
+<section id="start" class="abschnitt sanft">
   <div class="rahmen">
     <h2>In zwei Minuten startklar</h2>
     <ol class="schritte">
-      <li><a href="https://github.com/tho3mes/wortlaut-releases/releases/latest" target="_blank" rel="noopener noreferrer">Wortlaut.exe herunterladen</a> und in einen eigenen Ordner legen, z. B. <code>%LOCALAPPDATA%\Programs\Wortlaut</code>.</li>
+      <li><a href="https://github.com/tho3mes/wortlaut-releases/releases/latest/download/Wortlaut.exe">Wortlaut.exe herunterladen</a> und in einen eigenen Ordner legen, z. B. <code>%LOCALAPPDATA%\Programs\Wortlaut</code>.</li>
       <li>Starten – das Symbol erscheint im Infobereich der Taskleiste.</li>
       <li>Unter „Meine Schlüssel“ einen API-Schlüssel eintragen, speichern, fertig.</li>
     </ol>
@@ -122,7 +123,7 @@
   <div class="rahmen schmal">
     <h2>Häufige Fragen</h2>
     <details><summary>Ist Wortlaut wirklich kostenlos?</summary><p>Ja. Wortlaut selbst kostet nichts. Für die Spracherkennung brauchst du einen eigenen API-Schlüssel bei einem KI-Anbieter; dessen Nutzung rechnet der Anbieter direkt mit dir ab.</p></details>
-<details><summary>Welche KI-Anbieter werden unterstützt?</summary><p>oneAI, OpenAI, Google Gemini und Mistral für Spracherkennung und Text, Anthropic (Claude) für die Textaufbereitung. Fällt einer aus, übernimmt automatisch der nächste eingerichtete.</p></details>
+<details><summary>Welche KI-Anbieter werden unterstützt?</summary><p>OpenAI, Google Gemini und Mistral für Spracherkennung und Text, Anthropic (Claude) für die Textaufbereitung. Für Unternehmen zusätzlich oneAI. Fällt ein Anbieter aus, übernimmt automatisch der nächste eingerichtete.</p></details>
 <details><summary>Wohin gehen meine Aufnahmen?</summary><p>Nur während des Diktats und direkt von deinem PC an den Anbieter, den du selbst eingerichtet hast. Es gibt keinen Server dazwischen. Glossar, Stil und Verlauf bleiben auf deinem PC.</p></details>
 <details><summary>Brauche ich Administratorrechte oder .NET?</summary><p>Nein. Wortlaut ist eine einzelne Programmdatei mit eingebauter Laufzeit und läuft ohne Installation und ohne Adminrechte.</p></details>
 <details><summary>Warum warnt Windows beim ersten Start?</summary><p>Die Datei ist noch nicht digital signiert. Prüfe die veröffentlichte SHA-256-Prüfsumme und wähle dann „Weitere Informationen → Trotzdem ausführen“.</p></details>
