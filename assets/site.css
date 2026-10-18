@@ -92,3 +92,7 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 /* Produktlogo */
 .produktlogo{display:block;width:92px;height:92px;margin:0 0 18px}
 .karte .produktlogo{width:52px;height:52px;margin:0 0 12px}
+
+/* Werkstatt: Projekte in Arbeit, noch nicht veröffentlicht */
+.karte p.stand{margin-top:16px;font-size:13px;letter-spacing:.04em;color:var(--tinte);opacity:.7}
+.werkstatt-fuss{margin-top:22px}
