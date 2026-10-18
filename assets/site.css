@@ -149,3 +149,22 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 .szenen-wechsel>.szene{grid-area:1/1;transition:opacity .5s,visibility .5s}
 .szenen-wechsel>.szene.ruht{opacity:0;visibility:hidden}
 .szenen-wechsel .szene-fuss{margin-top:auto}
+
+/* Neuigkeiten: dezenter Hinweis, Neu-Zeile in der Projektkarte, Versionsverlauf (gepflegt von tools/neuigkeiten.py) */
+.neu-hinweis{margin:0 0 16px}
+.neu-hinweis a{display:inline-flex;align-items:center;gap:10px;max-width:100%;font-size:13px;line-height:1.4;color:var(--stein);text-decoration:none;border:1px solid var(--linie);border-radius:999px;padding:4px 14px 4px 4px;background:var(--flaeche);transition:border-color .15s,color .15s}
+.neu-hinweis a:hover{border-color:var(--signal);color:var(--tinte)}
+.neu-marke{flex:none;background:var(--signal);color:#fff;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.neu-zeile{display:inline-flex;align-items:center;gap:8px;margin:0 0 10px 12px;font-size:12px;color:var(--stein);vertical-align:top}
+.versionen{list-style:none;padding:0;margin:28px 0 18px}
+.versionen>li{padding:16px 0;border-bottom:1px solid var(--linie)}
+.versionen>li:first-child{padding-top:0}
+.version-kopf{display:flex;align-items:baseline;gap:14px;margin:0}
+.version-kopf b{font:400 24px/1.1 var(--serif)}
+.version-kopf span{font-size:13px;color:var(--stein);font-variant-numeric:tabular-nums}
+.version-kurz{margin:4px 0 0;color:var(--stein)}
+.aktuell .version-kopf b{color:var(--signal)}
+.aktuell .version-kurz{color:var(--tinte)}
+.version-punkte{margin:12px 0 0;padding-left:20px;color:var(--stein)}
+.version-punkte li{margin:6px 0}
+.version-punkte strong{color:var(--tinte);font-weight:600}
