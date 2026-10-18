@@ -7,9 +7,11 @@ document.querySelectorAll('[data-m]').forEach(function (a) {
 document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = new Date().getFullYear(); });
 
 // Externe Links: öffnen in einem neuen Fenster, vorher ein kurzer Hinweis, dass man diese Website verlässt.
+// Ausnahme: eigene Ziele (GitHub tho3mes, Ko-fi tho3mes) und Downloads öffnen ohne Hinweis.
 // Ohne JavaScript oder in alten Browsern öffnen sie direkt in einem neuen Fenster (target="_blank" im HTML).
 (function () {
   var dlg = null, ziel = '';
+  var eigene = /^(github\.com\/tho3mes|ko-fi\.com\/tho3mes)(\/|$)/i;
   function dialog() {
     if (dlg) return dlg;
     dlg = document.createElement('dialog');
@@ -34,6 +36,7 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
     var url;
     try { url = new URL(a.getAttribute('href'), location.href); } catch (x) { return; }
     if ((url.protocol !== 'http:' && url.protocol !== 'https:') || url.hostname === location.hostname) return;
+    if (eigene.test(url.hostname.replace(/^www\./, '') + url.pathname)) return;
     var d = dialog();
     if (typeof d.showModal !== 'function') return;
     e.preventDefault();
