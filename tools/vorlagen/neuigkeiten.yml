@@ -1,0 +1,49 @@
+# VORLAGE: ersetzt .github/workflows/neuigkeiten.yml (auf GitHub: Datei .github/workflows/neuigkeiten.yml oeffnen, Stift,
+# kompletten Inhalt durch diese Datei ersetzen, Commit). Workflow-Dateien kann nur Thomas selbst schreiben.
+#
+# Uebernimmt neue Wortlaut-Releases automatisch auf oesterle.cloud: Hinweis im Kopf der Wortlaut-Seite (45 Tage),
+# Eintrag unter "Was ist neu", kleine Zeile in der Projektkarte der Startseite, softwareVersion und Sitemap. Logik: tools/neuigkeiten.py
+# Ausloeser: stuendlich, per "Run workflow" von Hand, oder sofort per repository_dispatch (Typ wortlaut-release).
+# Kein neues Release = keine Aenderung, kein Commit.
+name: neuigkeiten
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [wortlaut-release]
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: neuigkeiten
+  cancel-in-progress: false
+
+jobs:
+  aktualisieren:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Neue Releases uebernehmen
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/neuigkeiten.py
+      - name: Committen, falls sich etwas geaendert hat
+        id: commit
+        run: |
+          if git diff --quiet; then echo "Keine Aenderung"; echo "neu=nein" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Neuigkeiten: Wortlaut-Release uebernommen"
+          git push
+          echo "neu=ja" >> "$GITHUB_OUTPUT"
+      # Pushes mit dem Workflow-Token starten nicht zuverlaessig einen Pages-Build, deshalb ausdruecklich anfordern
+      - name: Pages-Build anstossen
+        if: steps.commit.outputs.neu == 'ja'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds"
