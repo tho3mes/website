@@ -181,24 +181,73 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 .version-punkte li{margin:8px 0}
 .version-punkte strong{color:var(--tinte);font-weight:600}
 
-/* Wortmeldung: animierte Lernszenen (Abfrage, Hilfe-Leiter, Testplan), Logik in site.js */
-.lernszene{display:flex;flex-direction:column;gap:16px}
-.lern-fach{font-size:12px;font-weight:var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--akzent)}
-.lern-karte{background:var(--papier);border:1px solid var(--linie);border-radius:14px;padding:16px 20px 20px}
-.lern-richtung{margin:0 0 8px;font-size:13px;color:var(--stein)}
-.lern-frage{margin:0;min-height:1.2em;font:32px/1.2 var(--serif)}
-.lern-eingabe{margin:16px 0 0;min-height:1.6em;padding:4px 0;border-bottom:2px solid var(--linie);font-size:19px;line-height:1.4;transition:border-color .2s}
-.lernszene[data-zustand="tippt"] .lern-eingabe{border-bottom-color:var(--signal)}
-.lernszene[data-zustand="tippt"] .lern-eingabe::after{content:"";display:inline-block;width:2px;height:1.1em;margin-left:2px;vertical-align:-.15em;background:var(--signal);animation:puls 1s infinite}
-.lern-stufen{display:flex;gap:8px}
-.lern-stufen i{flex:1;height:6px;border-radius:3px;background:var(--linie);transition:background .3s}
-.lern-stufen i.an{background:var(--signal)}
-.lern-rueck{margin:0;min-height:4.7em;font-size:15px;line-height:1.55;color:var(--stein);opacity:0;transition:opacity .35s}
-.lern-rueck.da{opacity:1}
-.lern-rueck.gut,.lern-rueck.fast,.lern-rueck.hilfe{color:var(--tinte)}
-.lern-rueck.gut::before{content:"✓ ";color:var(--akzent);font-weight:600}
-.lern-rueck.fast::before{content:"↻ ";color:var(--akzent);font-weight:600}
-.lern-rueck.hilfe::before{content:"? ";color:var(--akzent);font-weight:600}
-.lern-sterne{opacity:0;transition:opacity .35s}
-.lern-sterne.da{opacity:1}
-.lernszene .szene-fuss{margin-top:auto}
+/* Wortmeldung: App-Nachbau im Design der App „Tinte, lauter“ (Farben aus Stil.cs), Ablauf in site.js (data-appszene) */
+.app{--a-papier:#F7F5F0;--a-flaeche:#FFFFFF;--a-tinte:#16161A;--a-stein:#625D55;--a-linie:#E6E1D8;--a-akzent:#3D7BFF;--a-erfolg:#1FB36B;--a-hinweis:#E58A00;--a-feuer:#FF7A1A;
+--f-englisch:#3D7BFF;--f-mathe:#FF5A36;--f-deutsch:#8B5CF6;--f-sonst:#12B886;
+background:#1E1E23;border-radius:34px;padding:12px;box-shadow:0 30px 60px -30px rgba(22,22,26,.45);max-width:560px;width:100%;justify-self:center}
+@media (prefers-color-scheme:dark){.app{--a-papier:#121216;--a-flaeche:#1E1E25;--a-tinte:#F2F0EA;--a-stein:#B4AEA5;--a-linie:#30303A;background:#000}}
+.app [hidden]{display:none!important}
+.app p{margin:0}
+.app-bild{background:var(--a-papier);color:var(--a-tinte);border-radius:24px;padding:20px 18px 12px;display:flex;flex-direction:column;gap:10px;min-height:560px;font:15px/1.4 var(--sans);overflow:hidden}
+.app-titel{font:800 26px/1.15 var(--sans);letter-spacing:-.02em}
+.app-titel.gross{font-size:32px}
+.app-text{color:var(--a-stein);font-size:14px}
+.app-fett{font-weight:700;font-size:16px}
+.app-klein{font-size:13px;color:var(--a-tinte)}
+.app .fett{font-weight:700}
+.app .feuer{color:var(--a-feuer)}
+.app .hinweis{color:var(--a-hinweis)}
+.app .leise-app{color:var(--a-stein)}
+.app-kopf{display:flex;align-items:center;gap:12px}
+.app-gruss{flex:1}
+.app-balken{flex:1;display:block;height:8px;border-radius:4px;background:var(--a-linie);overflow:hidden}
+.app-balken i{display:block;height:100%;background:var(--a-akzent);border-radius:4px;transition:width .7s ease}
+.app-balken.feuer i{background:var(--a-feuer)}
+.app-karte .app-balken{flex:none;margin:6px 0}
+.app-zaehler{font-weight:700;color:var(--a-stein);font-size:13px;font-variant-numeric:tabular-nums}
+.app-karte{background:var(--a-flaeche);border:1px solid var(--a-linie);border-radius:18px;padding:14px;box-shadow:0 3px 12px rgba(0,0,0,.05);transition:background .3s,border-color .3s}
+.app-karte.gross{padding:26px 16px;text-align:center}
+.app-karte.gut{background:color-mix(in srgb,var(--a-erfolg) 14%,var(--a-flaeche));border-color:var(--a-erfolg)}
+.app-frage{font:800 34px/1.15 var(--sans);letter-spacing:-.02em;margin:8px 0!important}
+.app-aufgabe{font-weight:700;font-size:19px;margin-top:6px!important}
+.app-rueck{font-weight:700;font-size:16px;color:var(--a-erfolg);margin-top:6px!important}
+.app-raster{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.app-reihe{display:flex;flex-wrap:wrap;gap:8px}
+.app-knopf{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 16px;border-radius:12px;border:1px solid var(--a-linie);background:var(--a-flaeche);color:var(--a-tinte);font-weight:700;font-size:15px;transition:transform .12s,background .25s,color .25s,border-color .25s}
+.app-knopf.primaer{background:var(--a-akzent);border-color:var(--a-akzent);color:#fff}
+.app-knopf.gross{min-height:58px}
+.app-knopf.gut{background:var(--a-erfolg);border-color:var(--a-erfolg);color:#fff}
+.app-knopf.druck{transform:scale(.94)}
+.app-feld{border:1px solid var(--a-linie);background:var(--a-flaeche);border-radius:12px;padding:10px 12px;font-size:19px;min-height:48px}
+.app-feld:empty::before{content:attr(data-platz);color:var(--a-stein);font-size:16px}
+.app-feld.tippt::after{content:"";display:inline-block;width:2px;height:1.1em;margin-left:2px;vertical-align:-.15em;background:var(--a-akzent);animation:puls 1s infinite}
+.app-pille{display:inline-block;align-self:flex-start;padding:3px 10px;border-radius:12px;color:#fff;font-weight:700;font-size:12px;line-height:1.5;background:var(--a-akzent)}
+.app-pille.mathe{background:var(--f-mathe)}
+.app-pille.englisch{background:var(--f-englisch)}
+.app-pille.erfolg{background:var(--a-erfolg)}
+.app-blase{align-self:flex-start;max-width:92%;background:var(--a-flaeche);border:1px solid var(--a-linie);border-radius:16px;padding:9px 14px;font-size:15px}
+.app-blase b{display:block;font-size:12px;color:var(--a-stein);margin-bottom:2px}
+.app-held{background:var(--a-akzent);color:#fff;border-radius:18px;padding:18px}
+.app-held .app-titel{color:#fff;margin-top:4px}
+.app-held p{margin:4px 0 12px}
+.app-held .app-knopf{color:var(--a-tinte)}
+.app-symbol{font-size:34px;line-height:1}
+.app-symbol.gross{font-size:54px}
+.app-ende{display:flex;flex-direction:column;gap:8px;padding-top:12px}
+.app-drei{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.app-drei .app-karte{display:flex;flex-direction:column;gap:4px}
+.app-abschnitt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a-stein)}
+.app-zahl{font:800 28px/1.1 var(--sans)}
+.app-zahl.klein{font-size:19px}
+.app-kacheln{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.app-kachel{--k:var(--f-sonst);border-radius:16px;padding:10px;font-size:11px;line-height:1.3;color:var(--a-stein);background:color-mix(in srgb,var(--k) 10%,transparent);border:1px solid color-mix(in srgb,var(--k) 35%,transparent)}
+.app-kachel span{display:block;font-size:22px;line-height:1.2}
+.app-kachel b{display:block;font-size:13px;color:var(--a-tinte)}
+.app-kachel.englisch{--k:var(--f-englisch)}.app-kachel.mathe{--k:var(--f-mathe)}.app-kachel.deutsch{--k:var(--f-deutsch)}
+.app-leiste{margin-top:auto;align-self:center;display:flex;gap:2px;background:var(--a-flaeche);border:1px solid var(--a-linie);border-radius:26px;padding:5px;box-shadow:0 4px 20px rgba(0,0,0,.10)}
+.app-leiste span{width:60px;padding:5px 0;border-radius:18px;text-align:center;font-size:11px;line-height:1.25;color:var(--a-stein)}
+.app-leiste i{display:block;font-style:normal;font-size:18px;opacity:.65}
+.app-leiste .an{background:color-mix(in srgb,var(--a-akzent) 13%,transparent);color:var(--a-akzent);font-weight:700}
+.app-leiste .an i{opacity:1}
+.app-hinweis{margin:10px 4px 2px!important;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#B4AEA5;text-align:center}
+@media (max-width:520px){.app-drei{grid-template-columns:1fr}.app-kacheln{grid-template-columns:repeat(2,1fr)}.app-leiste span{width:50px;font-size:10px}.app-frage{font-size:28px}}

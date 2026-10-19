@@ -197,94 +197,62 @@ document.querySelectorAll('[data-jahr]').forEach(function (e) { e.textContent = 
   });
 })();
 
-// Wortmeldung: animierte Lernszenen (Illustration, kein Video). Frage erscheint, Antwort wird getippt,
-// Rückmeldung folgt, bei der Hilfe-Leiter in Stufen. Typ über data-lernszene: abfrage, hilfe, test.
-// Startet beim Hineinscrollen, pausiert außerhalb. Bei „Bewegung reduzieren“ oder ohne JavaScript bleibt das Standbild.
+// Wortmeldung: App-Nachbau in Schritten (Illustration, kein Video). data-takte = Dauer je Schritt in ms.
+// Kinder steuern sich über Attribute: data-zeige="1 3" (sichtbar in Schritt 1 und 3), data-an="gut:3;druck:2" (Klasse je Schritt),
+// data-breite="1:20%;4:30%" (Balkenbreite), data-tippe="Text" mit data-tippe-bei (tippt in diesem Schritt) und data-tippe-voll (steht fertig da).
+// Startet beim Hineinscrollen, pausiert außerhalb. Bei „Bewegung reduzieren“ oder ohne JavaScript bleibt das Standbild aus dem HTML.
 (function () {
-  var szenen = document.querySelectorAll('[data-lernszene]');
+  var szenen = document.querySelectorAll('[data-appszene]');
   if (!szenen.length) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var ablaeufe = {
-    abfrage: [
-      { fach: 'Englisch · Unit 3', richtung: 'Deutsch → Englisch', frage: 'die Lieferung', zaehler: '3 von 10', sterne: '+2 Sterne',
-        versuche: [{ eingabe: 'delivery', rueck: 'Richtig! Die Karte wandert ein Fach weiter.', art: 'gut' }] },
-      { fach: 'Englisch · Unit 3', richtung: 'Englisch → Deutsch', frage: 'to arrive', zaehler: '4 von 10', sterne: '+4 Sterne',
-        versuche: [{ eingabe: 'ankommen', rueck: 'Richtig! Diese Karte sitzt jetzt sicher.', art: 'gut' }] },
-      { fach: 'Englisch · Unit 3', richtung: 'Deutsch → Englisch', frage: 'sich beeilen', zaehler: '5 von 10', sterne: '+1 Stern',
-        versuche: [{ eingabe: 'to hury', rueck: 'Fast! Ein r fehlt: to hurry. Die Karte kommt morgen wieder.', art: 'fast' }] }
-    ],
-    hilfe: [
-      { fach: 'Mathe · Gleichungen', richtung: 'Blatt 4, Aufgabe 2', frage: '3x + 5 = 20', zaehler: 'Hilfe-Leiter',
-        versuche: [
-          { eingabe: 'x = 8', rueck: 'Noch nicht. Denkanstoß: Was bleibt übrig, wenn du auf beiden Seiten 5 abziehst?', art: 'hilfe', stufe: 1 },
-          { eingabe: '3x = 15', rueck: 'Genau, das war der Teilschritt. Jetzt nur noch durch 3 teilen.', art: 'hilfe', stufe: 2 },
-          { eingabe: 'x = 5', rueck: 'Richtig, und das hast du selbst gelöst. Gleich kommt eine ähnliche Aufgabe.', art: 'gut', stufe: 2 }
-        ] },
-      { fach: 'Physik · Kräfte', richtung: 'Infoblatt Reibung', frage: 'Warum rutscht ein Auto auf Eis?', zaehler: 'Hilfe-Leiter',
-        versuche: [
-          { eingabe: 'weil es glatt ist', rueck: 'Stimmt schon fast. Denkanstoß: Welche Kraft wird auf Eis viel kleiner?', art: 'hilfe', stufe: 1 },
-          { eingabe: 'die Reibung', rueck: 'Genau: weniger Reibung, weniger Halt. Das steht so auch auf deinem Infoblatt.', art: 'gut', stufe: 1 }
-        ] }
-    ],
-    test: [
-      { fach: 'Testplan', richtung: 'Vokabeltest Unit 3', frage: 'Donnerstag', zaehler: 'noch 4 Tage',
-        versuche: [
-          { eingabe: 'Heute: 12 Karten, etwa 15 Minuten', rueck: 'Der Plan rechnet rückwärts ab dem Testtag. Jeden Tag ein bisschen statt alles am Vorabend.', art: 'gut' },
-          { eingabe: 'Mittwoch: Generalprobe, 10 Minuten', rueck: 'Wie der echte Test, gemischt und ohne Hilfen. Danach der ehrliche Stand je Thema.', art: 'gut' }
-        ] },
-      { fach: 'Test-Rückschau', richtung: 'Foto vom korrigierten Test', frage: 'Englisch, Unit 2', zaehler: 'nach dem Test',
-        versuche: [
-          { eingabe: 'Fehlerart: Zeitform, 3-mal', rueck: 'Daraus werden gezielte Übungen für den nächsten Test. Fehler sind Daten, keine Schuld.', art: 'gut' }
-        ] }
-    ]
-  };
-  Array.prototype.forEach.call(szenen, function (el) {
-    var ablauf = ablaeufe[el.getAttribute('data-lernszene')];
-    if (!ablauf) return;
-    function feld(n) { return el.querySelector('[data-' + n + ']'); }
-    var q = { fach: feld('fach'), zaehler: feld('zaehler'), richtung: feld('richtung'), frage: feld('frage'),
-      eingabe: feld('eingabe'), rueck: feld('rueck'), sterne: feld('sterne'), stufen: el.querySelectorAll('[data-stufen] i') };
-    if (!q.frage || !q.eingabe || !q.rueck) return;
-    var nr = 0, timer = null, laeuft = false, sichtbar = false;
-    function warte(ms, fn) { timer = setTimeout(function () { if (laeuft) fn(); }, ms); }
-    function setze(e, t) { if (e) e.textContent = t || ''; }
-    function stufe(n) { Array.prototype.forEach.call(q.stufen, function (i, k) { i.classList.toggle('an', k < n); }); }
-    function tippe(text, fertig) {
-      var i = 0;
-      q.eingabe.textContent = '';
-      el.setAttribute('data-zustand', 'tippt');
-      (function weiter() {
-        if (i < text.length) { q.eingabe.textContent += text.charAt(i++); warte(80, weiter); }
-        else { el.setAttribute('data-zustand', 'prueft'); fertig(); }
-      })();
+  function drin(liste, s) { return (' ' + liste + ' ').indexOf(' ' + s + ' ') >= 0; }
+  function wert(liste, s) {
+    var teile = liste.split(';');
+    for (var i = 0; i < teile.length; i++) {
+      var t = teile[i].split(':');
+      if (t[0] === String(s)) return t[1];
     }
-    function versuch(s, k) {
-      var v = s.versuche[k];
-      q.rueck.className = 'lern-rueck';
-      tippe(v.eingabe, function () {
-        warte(600, function () {
-          setze(q.rueck, v.rueck);
-          q.rueck.className = 'lern-rueck da ' + (v.art || '');
-          stufe(v.stufe || 0);
-          el.setAttribute('data-zustand', 'fertig');
-          if (k + 1 < s.versuche.length) { warte(2800, function () { versuch(s, k + 1); }); return; }
-          if (s.sterne && q.sterne) { setze(q.sterne, s.sterne); q.sterne.classList.add('da'); }
-          warte(3400, runde);
+    return '';
+  }
+  Array.prototype.forEach.call(szenen, function (el) {
+    var takte = (el.getAttribute('data-takte') || '').split(',').map(Number).filter(function (x) { return x > 0; });
+    if (!takte.length) return;
+    var schritt = 0, timer = null, tipp = null, laeuft = false, sichtbar = false;
+    function alle(sel, fn) { Array.prototype.forEach.call(el.querySelectorAll(sel), fn); }
+    function tippe(e, text) {
+      var i = 0;
+      e.textContent = '';
+      e.classList.add('tippt');
+      clearInterval(tipp);
+      tipp = setInterval(function () {
+        if (!laeuft) { clearInterval(tipp); return; }
+        if (i < text.length) e.textContent += text.charAt(i++);
+        else { clearInterval(tipp); e.classList.remove('tippt'); }
+      }, 90);
+    }
+    function zeige(s) {
+      el.setAttribute('data-schritt', s);
+      alle('[data-zeige]', function (e) { e.hidden = !drin(e.getAttribute('data-zeige'), s); });
+      alle('[data-an]', function (e) {
+        e.getAttribute('data-an').split(';').forEach(function (p) {
+          var t = p.split(':');
+          if (t.length === 2) e.classList.toggle(t[0], drin(t[1], s));
         });
       });
+      alle('[data-breite]', function (e) { var w = wert(e.getAttribute('data-breite'), s); if (w) e.style.width = w; });
+      alle('[data-tippe]', function (e) {
+        if (e.getAttribute('data-tippe-bei') === String(s)) { tippe(e, e.getAttribute('data-tippe')); return; }
+        e.classList.remove('tippt');
+        e.textContent = drin(e.getAttribute('data-tippe-voll') || '', s) ? e.getAttribute('data-tippe') : '';
+      });
     }
-    function runde() {
-      var s = ablauf[nr++ % ablauf.length];
-      setze(q.fach, s.fach); setze(q.zaehler, s.zaehler); setze(q.richtung, s.richtung); setze(q.frage, s.frage);
-      q.eingabe.textContent = '';
-      q.rueck.className = 'lern-rueck';
-      stufe(0);
-      if (q.sterne) q.sterne.classList.remove('da');
-      el.setAttribute('data-zustand', 'bereit');
-      warte(1000, function () { versuch(s, 0); });
+    function weiter() {
+      schritt = schritt % takte.length + 1;
+      zeige(schritt);
+      timer = setTimeout(function () { if (laeuft) weiter(); }, takte[schritt - 1]);
     }
-    function start() { if (laeuft) return; laeuft = true; runde(); }
-    function stopp() { laeuft = false; clearTimeout(timer); }
+    function start() { if (laeuft) return; laeuft = true; schritt = 0; weiter(); }
+    function stopp() { laeuft = false; clearTimeout(timer); clearInterval(tipp); }
     function darf() { return sichtbar && !document.hidden; }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (e) {
