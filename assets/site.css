@@ -180,3 +180,25 @@ a[target="_blank"]:not(.knopf):not(.karte)::after{content:" ↗";font-size:.85em
 .version-punkte{margin:12px 0 0;padding-left:20px;color:var(--stein)}
 .version-punkte li{margin:8px 0}
 .version-punkte strong{color:var(--tinte);font-weight:600}
+
+/* Wortmeldung: animierte Lernszenen (Abfrage, Hilfe-Leiter, Testplan), Logik in site.js */
+.lernszene{display:flex;flex-direction:column;gap:16px}
+.lern-fach{font-size:12px;font-weight:var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--akzent)}
+.lern-karte{background:var(--papier);border:1px solid var(--linie);border-radius:14px;padding:16px 20px 20px}
+.lern-richtung{margin:0 0 8px;font-size:13px;color:var(--stein)}
+.lern-frage{margin:0;min-height:1.2em;font:32px/1.2 var(--serif)}
+.lern-eingabe{margin:16px 0 0;min-height:1.6em;padding:4px 0;border-bottom:2px solid var(--linie);font-size:19px;line-height:1.4;transition:border-color .2s}
+.lernszene[data-zustand="tippt"] .lern-eingabe{border-bottom-color:var(--signal)}
+.lernszene[data-zustand="tippt"] .lern-eingabe::after{content:"";display:inline-block;width:2px;height:1.1em;margin-left:2px;vertical-align:-.15em;background:var(--signal);animation:puls 1s infinite}
+.lern-stufen{display:flex;gap:8px}
+.lern-stufen i{flex:1;height:6px;border-radius:3px;background:var(--linie);transition:background .3s}
+.lern-stufen i.an{background:var(--signal)}
+.lern-rueck{margin:0;min-height:4.7em;font-size:15px;line-height:1.55;color:var(--stein);opacity:0;transition:opacity .35s}
+.lern-rueck.da{opacity:1}
+.lern-rueck.gut,.lern-rueck.fast,.lern-rueck.hilfe{color:var(--tinte)}
+.lern-rueck.gut::before{content:"✓ ";color:var(--akzent);font-weight:600}
+.lern-rueck.fast::before{content:"↻ ";color:var(--akzent);font-weight:600}
+.lern-rueck.hilfe::before{content:"? ";color:var(--akzent);font-weight:600}
+.lern-sterne{opacity:0;transition:opacity .35s}
+.lern-sterne.da{opacity:1}
+.lernszene .szene-fuss{margin-top:auto}
