@@ -4,14 +4,22 @@ Statische Projektseite von Thomas Oesterle, ausgeliefert über GitHub Pages. Kei
 
 ## Vor dem ersten Veröffentlichen
 - [x] Impressum ausgefüllt
-- [ ] Schriften nach `assets/fonts/` kopieren (siehe LIESMICH.txt) und `OFL.txt` dazulegen
+- [x] Schriften in `assets/fonts/` mit `OFL.txt`
 - [ ] Domain in `CNAME` prüfen (aktuell: `oesterle.cloud`)
+
+## Leitlinie Inhalte
+- KI aus Europa zuerst: oneAI und Mistral werden zuerst genannt und empfohlen, OpenAI, Gemini und Claude nur als weitere Anbieter.
+- Nur prüfbare Angaben, keine Anbieterzahlen als Verkaufsargument.
 
 ## Unterstützen-Link
 Ko-fi-Profil: `ko-fi.com/tho3mes` (in index.html und wortlaut/index.html).
 
 ## Werkstatt (Projekte in Arbeit)
-Abschnitt `#werkstatt` auf der Startseite: gestrichelte Karten (`karte leer`) mit Etikett „Coming soon“ und Zeile `p.stand` (z. B. „Alpha · noch nicht veröffentlicht“). Keine Downloads, keine Unterseite, keine Namen von Kindern. Aktuell: Wortwechsel (Alpha), Klarschiff (Alpha), Wortmeldung, Zeichenatelier. Wird ein Projekt veröffentlicht (eigenes Release-Repo), wandert die Karte nach „Projekte“ und bekommt eine Unterseite.
+Abschnitt `#werkstatt` auf der Startseite: gestrichelte Karten (`karte leer`) mit Etikett „Coming soon“ und Zeile `p.stand` (z. B. „Alpha · noch nicht veröffentlicht“). Keine Downloads, keine Namen von Kindern. Aktuell: Wortmeldung, Wortwechsel (Alpha), Klarschiff (Alpha), Zeichenatelier.
+
+Kurz vor dem Start darf ein Werkstatt-Projekt eine Vorschau-Unterseite bekommen (Coming soon, Funktionen, Roadmap, Ratgeber, keine Downloads). Die Karte wird dann zum Link (`a.karte.leer`). Aktuell: `wortmeldung/` mit Lernszenen (`data-lernszene` in site.js).
+
+Wird ein Projekt veröffentlicht (eigenes Release-Repo), wandert die Karte nach „Projekte“ und die Unterseite bekommt Downloads.
 
 ## Neues Projekt ergänzen
 1. Ordner `projektname/` mit `index.html` anlegen (Vorlage: `wortlaut/index.html`).
