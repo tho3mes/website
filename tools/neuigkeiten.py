@@ -30,6 +30,8 @@ SITEMAP = "sitemap.xml"
 MAX_EINTRAEGE = 6
 TAGE_HINWEIS = 45
 PUNKTE_AKTUELL = 4
+# Abkuerzungen, an denen kein Satz endet (einbuchstabige wie z. B., u. a., d. h. sind immer ausgenommen)
+ABKUERZUNGEN = {"bzw", "ca", "usw", "etc", "ggf", "inkl", "evtl", "vgl", "bspw", "max", "min", "nr", "tel", "sog", "zb", "dh", "ua"}
 
 
 def esc(t):
@@ -91,6 +93,20 @@ def kurztext(body):
     return ", ".join(koepfe)
 
 
+def erster_satz(t):
+    """Erster Satz, ohne an Abkuerzungen (z. B., u. a., bzw.) oder Ordnungszahlen zu trennen."""
+    for m in re.finditer(r"[.!?](?=\s+\S)", t):
+        if m.group() == ".":
+            w = re.search(r"(\w+)$", t[:m.start()])
+            nach = t[m.end():].lstrip()[:1]
+            if w and (len(w.group(1)) == 1 or w.group(1).lower() in ABKUERZUNGEN):
+                continue
+            if w and w.group(1).isdigit() and (nach.islower() or nach.isdigit()):
+                continue
+        return t[:m.end()]
+    return t
+
+
 def punkt_html(p):
     m = re.match(r"^([^:]{2,60}):\s*(.+)$", p)
     if m:
@@ -98,8 +114,7 @@ def punkt_html(p):
         rest = m.group(2)
     else:
         k, rest = "", p
-    saetze = re.split(r"(?<=[.!?])\s+", rest)
-    rest = saetze[0] if saetze else rest
+    rest = erster_satz(rest)
     if len(rest) > 170:
         rest = rest[:167].rsplit(" ", 1)[0] + " …"
     return ("<strong>" + esc(k) + ":</strong> " if k else "") + esc(rest)
